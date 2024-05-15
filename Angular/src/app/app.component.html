@@ -1,0 +1,157 @@
+<div class="card">
+
+
+
+
+  <p-button label="Create User" (click)="showDialog()"></p-button>
+
+
+  <p-table [value]="allEmployee" [tableStyle]="{ 'min-width': '50rem' }" [paginator]="true"
+    [showCurrentPageReport]="true" [rows]="5" [rowsPerPageOptions]="[5,10,15,20]">
+    <ng-template pTemplate="header">
+      <tr>
+        <th>Firstname</th>
+        <th>Email</th>
+        <th>PhoneNumber</th>
+        <th>Department</th>
+        <th>Salary</th>
+        <th>Edit</th>
+        <th>Delete</th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-emp>
+      <tr>
+        <td>{{ emp.firstName }}</td>
+        <td>{{ emp.email }}</td>
+        <td>{{ emp.phoneNumber }}</td>
+        <td>{{ emp.department }}</td>
+        <td>{{ emp.salary }}</td>
+        <td (click)="showEditDialog(emp)">
+          <p-button label="Edit"></p-button>
+        </td>
+        <td (click)="showDeleteDialog(emp)">
+          
+          <p-button label="Delete"></p-button>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
+
+  <p-dialog header="Create Employee" [modal]="true" [(visible)]="visible" [style]="{ width: '50rem' }">
+    <form [formGroup]="EmployeeCreationForm">
+      <div class="field mb-5" >
+        <label for="id">id</label>
+        <input pInputText id="id" formControlName="id" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+    </div>
+      
+<div class="field mb-5" >
+    <label for="firstname">Firstname</label>
+    <input pInputText id="firstname" formControlName="firstname" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+</div>
+<div class="field mb-5" >
+    <label for="lastname">Lastname</label>
+    <input pInputText id="lastname" formControlName="lastname" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+</div>
+<div class="field mb-5">
+    <label for="email">Email</label>
+    <input  pInputText id="email" formControlName="email" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+</div>
+
+<div class="field mb-5">
+  <label for="phoneNumber">PhoneNumber</label>
+  <input pInputText id="phoneNumber" formControlName= "phoneNumber" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+</div>
+<div class="field mb-5">
+  <label for="department">Department</label>
+  <input pInputText id="department" formControlName="department" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+</div>
+<div class="field mb-5">
+  <label for="salary">Salary</label>
+  <input pInputText id="salary" formControlName="salary" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+</div>
+
+      <div class="flex justify-content-end gap-2">
+        <button pButton label="Cancel" severity="secondary" (click)="visible = false" ></button>
+        <button pButton label="Save" type="button" (click)="createemp()" ></button>
+
+      </div>
+
+    
+    </form>
+
+  </p-dialog>
+
+
+
+
+
+  <p-dialog header="Edit Employee" [modal]="true" [(visible)]="editvisible" [style]="{ width: '50rem' }">
+    <form [formGroup]="EmployeeEditForm">
+      <div class="field mb-5" >
+        <label for="id">id</label>
+        <input pInputText id="id" formControlName="id" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+    </div>
+                  
+<div class="field mb-5" >
+    <label for="firstname">Firstname</label>
+    <input pInputText id="firstname" formControlName="firstname" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+</div>
+<div class="field mb-5" >
+    <label for="lastname">Lastname</label>
+    <input pInputText id="lastname" formControlName="lastname" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+</div>
+<div class="field mb-5">
+    <label for="email">Email</label>
+    <input  pInputText id="email" formControlName="email" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+</div>
+
+<div class="field mb-5">
+  <label for="phoneNumber">PhoneNumber</label>
+  <input pInputText id="phoneNumber" formControlName= "phoneNumber" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+</div>
+<div class="field mb-5">
+  <label for="department">Department</label>
+  <input pInputText id="department" formControlName="department" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+</div>
+<div class="field mb-5">
+  <label for="salary">Salary</label>
+  <input pInputText id="salary" formControlName="salary" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+</div>
+
+      <div class="flex justify-content-end gap-2">
+        <button pButton label="Cancel" severity="secondary" (click)="editvisible = false" ></button>
+        <button pButton label="Save" type="button" (click)="editemp()" ></button>
+
+      </div>
+      
+    
+    </form>
+   </p-dialog>
+
+  <p-dialog header="Delete Employee" [modal]="true" [(visible)]="deletevisible" [style]="{ width: '50rem' }">
+    <form [formGroup]="EmployeeEditForm">
+      <div class="field mb-5" >
+        <label for="id">id</label>
+        <input pInputText id="id" formControlName="id" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+    </div>
+      
+<div class="field mb-5" >
+    <label for="firstname">Firstname</label>
+    <input pInputText id="firstname" formControlName="firstname" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+</div>
+
+<div class="field mb-5">
+    <label for="email">Email</label>
+    <input  pInputText id="email" formControlName="email" type="text" class="text-base text-color surface-overlay p-2 border-1 border-solid surface-border border-round appearance-none outline-none focus:border-primary w-full">
+</div>
+
+
+      <div class="flex justify-content-end gap-2">
+        <button pButton label="Cancel" severity="secondary" (click)="deletevisible = false" ></button>
+        <button pButton label="Delete" type="button" (click)="deleteemp()" ></button>
+
+      </div>
+      
+    
+    </form>
+  </p-dialog>
